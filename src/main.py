@@ -1,6 +1,6 @@
 from algo.knn import Knn
 from algo.linear_reg import LinearRegression, mse
-# import matplotlib.pyplot as plt
+from algo.logistic_reg import LogisticRegression
 import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
@@ -42,7 +42,20 @@ def run_knn(
     # compute algorithm performance
     acc = np.sum(predictions == y_test) / len(y_test)
     print(f"{acc:.4f} - accuracy - {clf.name}")
+
+# logistic regression pipeline
+def run_logistic_reg(
+    X_train:np.ndarray, X_test:np.ndarray, y_train:np.ndarray, y_test:np.ndarray
+) -> None:
+    # apply logistic regression algorithm
+    clf = LogisticRegression(lr=0.01, n_iters=1000)
+    clf.fit(X_train, y_train)
+    predictions = clf.predict(X_test)
     
+    # compute algorithm performance
+    acc = np.sum(predictions == y_test) / len(y_test)
+    print(f"{acc:.4f} - accuracy - {clf.name}")
+
 # linear regression pipeline
 def run_linear_reg(
     X_train:np.ndarray, X_test:np.ndarray, y_train:np.ndarray, y_test:np.ndarray
@@ -56,8 +69,10 @@ def run_linear_reg(
     error = mse(y_test, predictions)
     print(f"{error:.4f} - error - {reg.name}")
 
+
 #--- run algorithm pipelines --------------------------------------------------#
 
 if __name__ == '__main__':
     run_knn(X_class_train, X_class_test, y_class_train, y_class_test)
+    run_logistic_reg(X_class_train, X_class_test, y_class_train, y_class_test)
     run_linear_reg(X_reg_train, X_reg_test, y_reg_train, y_reg_test)
