@@ -5,7 +5,7 @@ def euclidean_distance(x1:int, x2:int) -> float:
     # compute Euclidean distance between two points
     return np.sqrt(np.sum((x1-x2)**2))
 
-class knn:
+class Knn:
     def __init__(self, k=3):
         self.name = "knn"
         self.k = k
@@ -17,8 +17,8 @@ class knn:
     
     # predict y using test data
     def predict(self, X_test:np.ndarray) -> list:
-        predictions = [self._predict(x) for x in X_test]
-        return predictions
+        y_preds = [self._predict(x) for x in X_test]
+        return y_preds
     
     # helper function to predict y using test data
     def _predict(self, x:int) -> int:
@@ -30,5 +30,5 @@ class knn:
         k_nearest_labels = [self.y_train[i] for i in k_nearest_indeces]
         
         # majority vote
-        most_common = Counter(k_nearest_labels).most_common()
-        return most_common[0][0]
+        y_pred = Counter(k_nearest_labels).most_common()[0][0]
+        return y_pred
