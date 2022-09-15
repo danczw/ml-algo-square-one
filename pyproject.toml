@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ml-algo-square-one"
+version = "0.1.0"
+description = "Machine Learning algorithms from square one."
+authors = ["Daniel <dev.dc@pm.me>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "ml_algo_square_one"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.23.3"
+scikit-learn = "^1.1.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
