@@ -1,4 +1,8 @@
 import numpy as np
+import warnings
+
+# suppress 'RuntimeWarning: overflow encountered in exp' warning
+warnings.filterwarnings('ignore')
 
 class LogisticRegression:
     def __init__(self, lr=0.001, n_iters=1000):
@@ -18,7 +22,7 @@ class LogisticRegression:
         for itr in range(self.n_iters):
             # get predictions
             y_linear_preds = np.dot(X_train, self.weights) + self.bias
-            y_preds = sigmoid(y_linear_preds)
+            y_preds = self._sigmoid(y_linear_preds)
             
             # gradient descent
             # compute gradients of weights and bias
@@ -33,12 +37,12 @@ class LogisticRegression:
     def predict(self, X_test:np.ndarray) -> list:
         # get predictions
         y_linear_preds = np.dot(X_test, self.weights) + self.bias
-        y_sigm_preds = sigmoid(y_linear_preds)
+        y_sigm_preds = self._sigmoid(y_linear_preds)
         
         # convert to class predictions
         y_preds = [0 if y <= 0.5 else 1 for y in y_sigm_preds]
         return y_preds
         
-# define sigmoid function for calculation of classification probabilities
-def sigmoid(x:int) -> float:
-    return 1/(1+np.exp(-x))
+    # define sigmoid function for calculation of classification probabilities
+    def _sigmoid(self, x:int) -> float:
+        return 1/(1+np.exp(-x))

@@ -1,18 +1,28 @@
 from algo.knn import Knn
-from algo.linear_reg import LinearRegression, mse
+from algo.linear_reg import LinearRegression
 from algo.logistic_reg import LogisticRegression
 import numpy as np
+import util
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
 #--- load data ----------------------------------------------------------------#
 
-# load classification data
+# load multi class classification data
 iris = datasets.load_iris()
-X_class, y_class = iris.data, iris.target
-X_class_train, X_class_test, y_class_train, y_class_test = train_test_split(
-    X_class,
-    y_class,
+X_multi_class, y_muli_class = iris.data, iris.target
+X_multic_train, X_multic_test, y_multic_train, y_multic_test = train_test_split(
+    X_multi_class,
+    y_muli_class,
+    test_size=0.2
+)
+
+# load binary class classification data
+bc = datasets.load_breast_cancer()
+X_bin_class, y_bin_class = bc.data, bc.target
+X_binc_train, X_binc_test, y_binc_train, y_binc_test = train_test_split(
+    X_bin_class,
+    y_bin_class,
     test_size=0.2
 )
 
@@ -40,7 +50,7 @@ def run_knn(
     predictions = clf.predict(X_test)
     
     # compute algorithm performance
-    acc = np.sum(predictions == y_test) / len(y_test)
+    acc = util.accuracy(y_test, predictions)
     print(f"{acc:.4f} - accuracy - {clf.name}")
 
 # logistic regression pipeline
@@ -53,7 +63,7 @@ def run_logistic_reg(
     predictions = clf.predict(X_test)
     
     # compute algorithm performance
-    acc = np.sum(predictions == y_test) / len(y_test)
+    acc = util.accuracy(y_test, predictions)
     print(f"{acc:.4f} - accuracy - {clf.name}")
 
 # linear regression pipeline
@@ -66,13 +76,13 @@ def run_linear_reg(
     predictions = reg.predict(X_test)
     
     # compute algorithm performance
-    error = mse(y_test, predictions)
+    error = util.mse(y_test, predictions)
     print(f"{error:.4f} - error - {reg.name}")
 
 
 #--- run algorithm pipelines --------------------------------------------------#
 
 if __name__ == '__main__':
-    run_knn(X_class_train, X_class_test, y_class_train, y_class_test)
-    run_logistic_reg(X_class_train, X_class_test, y_class_train, y_class_test)
+    run_knn(X_multic_train, X_multic_test, y_multic_train, y_multic_test)
+    run_logistic_reg(X_binc_train, X_binc_test, y_binc_train, y_binc_test)
     run_linear_reg(X_reg_train, X_reg_test, y_reg_train, y_reg_test)

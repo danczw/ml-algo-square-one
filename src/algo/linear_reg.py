@@ -32,7 +32,3 @@ class LinearRegression:
     def predict(self, X_test:np.ndarray) -> list:
         y_preds = np.dot(X_test, self.weights) + self.bias
         return y_preds
-    
-# compute algorithm error using mean squared error
-def mse(y_true:np.ndarray, y_preds:np.ndarray) -> float:
-    return np.mean((y_true - y_preds)**2)
