@@ -2,7 +2,9 @@ from algo.knn import Knn
 from algo.decision_tree import DecisionTree
 from algo.linear_reg import LinearRegression
 from algo.logistic_reg import LogisticRegression
+from algo.random_forest import RandomForest
 import numpy as np
+from algo.random_forest import RandomForest
 import util
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
@@ -79,6 +81,18 @@ def run_decision_tree(
     acc = util.accuracy(y_test, predictions)
     print(f"{acc:.4f} - accuracy - {clf.name}")
 
+def run_random_forest(
+    X_train:np.ndarray, X_test:np.ndarray, y_train:np.ndarray, y_test:np.ndarray
+) -> None:
+    # apply decision tree algorithm
+    clf = RandomForest(n_trees=20, min_samples_split=3)
+    clf.fit(X_train, y_train)
+    predictions = clf.predict(X_test)
+    
+    # compute algorithm performance
+    acc = util.accuracy(y_test, predictions)
+    print(f"{acc:.4f} - accuracy - {clf.name}")
+
 # linear regression pipeline
 def run_linear_reg(
     X_train:np.ndarray, X_test:np.ndarray, y_train:np.ndarray, y_test:np.ndarray
@@ -99,4 +113,5 @@ if __name__ == '__main__':
     run_knn(X_multic_train, X_multic_test, y_multic_train, y_multic_test)
     run_logistic_reg(X_binc_train, X_binc_test, y_binc_train, y_binc_test)
     run_decision_tree(X_binc_train, X_binc_test, y_binc_train, y_binc_test)
+    run_random_forest(X_binc_train, X_binc_test, y_binc_train, y_binc_test)
     run_linear_reg(X_reg_train, X_reg_test, y_reg_train, y_reg_test)
