@@ -56,12 +56,14 @@ class DecisionTree:
         grow_right = self._grow_tree(X_train[right_idxs, :], y_train[right_idxs], depth+1)
         
         return Node(best_feature, best_thresh, grow_left, grow_right)
-        
+    
+    # return most common label in a list
     def _most_common_label(self, y_train:np.ndarray) -> int:
         counter = Counter(y_train)
         most_common = counter.most_common(1)[0][0]
         return most_common
     
+    # compute best split for max information gain
     def _best_split(
         self,
         X_train:np.ndarray,
