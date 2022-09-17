@@ -2,7 +2,14 @@ from collections import Counter
 import numpy as np
 
 class Node:
-    def __init__(self, feature=None, threshold=None, left=None, right=None,*,value=None):
+    def __init__(
+        self,
+        feature=None,
+        threshold=None,
+        left=None,
+        right=None,
+        *,value=None
+    ) -> None:
         self.feature = feature
         self.threshold = threshold
         self.left = left
@@ -38,7 +45,11 @@ class DecisionTree:
         n_labels = len(np.unique(y_train))
         
         # check stopping criteria
-        if (depth >= self.max_depth or n_labels==1 or n_samples < self.min_samples_split):
+        if (
+            depth >= self.max_depth
+            or n_labels==1
+            or n_samples < self.min_samples_split
+        ):
             leaf_value = self._most_common_label(y_train)
             return Node(value=leaf_value)
         

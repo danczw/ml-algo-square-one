@@ -2,7 +2,7 @@ from collections import Counter
 import numpy as np
 
 class Knn:
-    def __init__(self, k=3):
+    def __init__(self, k=3) -> None:
         self.name = "knn"
         self.k = k
     
@@ -19,7 +19,9 @@ class Knn:
     # helper function to predict y using test data
     def _predict(self, x:int) -> int:
         # compute distances
-        distances = [self._euclidean_distance(x, x_train) for x_train in self.X_train]
+        distances = [
+            self._euclidean_distance(x, x_train) for x_train in self.X_train
+        ]
         
         # get clostest k points
         k_nearest_indeces = np.argsort(distances)[:self.k]

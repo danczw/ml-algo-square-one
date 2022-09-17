@@ -5,7 +5,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 class LogisticRegression:
-    def __init__(self, lr=0.001, n_iters=1000):
+    def __init__(self, lr=0.001, n_iters=1000) -> None:
         self.name = "logistic regression"
         self.lr = lr
         self.n_iters = n_iters
