@@ -3,7 +3,8 @@ from algo.decision_tree import DecisionTree
 from algo.linear_reg import LinearRegression
 from algo.logistic_reg import LogisticRegression
 from algo.naive_bayes import NaiveBayes
-from algo.pca import PCA
+from algo.perceptron import Perceptron
+from algo.principle_components_analysis import PCA
 from algo.random_forest import RandomForest
 from algo.random_forest import RandomForest
 import util
@@ -45,6 +46,7 @@ X_reg_train, X_reg_test, y_reg_train, y_reg_test = train_test_split(
 #--- def algorithm pipelines --------------------------------------------------#
 
 def main():
+    print(util.bcolors.OKCYAN + "\n# --- regression --- #" + util.bcolors.ENDC)
     # init regression algorithms
     regr_linear_regr = LinearRegression(lr=0.01, n_iters=1000)
     
@@ -59,7 +61,9 @@ def main():
             y_train=y_reg_train,
             y_test=y_reg_test
         )
-        
+    
+    print(util.bcolors.OKCYAN + "\n# --- multi class classification --- #"
+          + util.bcolors.ENDC)
     # init multi class classification algorithms
     clf_knn = Knn(k=5)
     
@@ -75,17 +79,21 @@ def main():
             y_test=y_multic_test
         )
 
+    print(util.bcolors.OKCYAN + "\n# --- binary classification --- #"
+          + util.bcolors.ENDC)
     # init binary classification algorithms
     clf_logistic_reg = LogisticRegression(lr=0.01, n_iters=1000)
     clf_decision_tree = DecisionTree(max_depth=10)
     clf_random_forest = RandomForest(n_trees=10, min_samples_split=3)
     clf_naive_bayes = NaiveBayes()
+    clf_percepton = Perceptron(learning_rate=0.01, n_iters=1000)
     
     multi_class_algos = [
         clf_logistic_reg,
         clf_decision_tree,
-        # clf_random_forest,
-        clf_naive_bayes
+        clf_random_forest,
+        clf_naive_bayes,
+        clf_percepton
     ]
     
     # run binary classification pipelines
@@ -97,7 +105,9 @@ def main():
             y_train=y_binc_train,
             y_test=y_binc_test
         )
-        
+    
+    print(util.bcolors.OKCYAN + "\n# --- dimensionality reduction --- #"
+          + util.bcolors.ENDC)
     # init dimensionality reduction algorithms
     dr_pca = PCA(n_components=2)
     
