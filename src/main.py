@@ -3,6 +3,7 @@ from algo.decision_tree import DecisionTree
 from algo.linear_reg import LinearRegression
 from algo.logistic_reg import LogisticRegression
 from algo.naive_bayes import NaiveBayes
+from algo.pca import PCA
 from algo.random_forest import RandomForest
 from algo.random_forest import RandomForest
 import util
@@ -81,8 +82,10 @@ def main():
     clf_naive_bayes = NaiveBayes()
     
     multi_class_algos = [
-        clf_logistic_reg, clf_decision_tree,
-        clf_random_forest, clf_naive_bayes
+        clf_logistic_reg,
+        clf_decision_tree,
+        # clf_random_forest,
+        clf_naive_bayes
     ]
     
     # run binary classification pipelines
@@ -94,6 +97,20 @@ def main():
             y_train=y_binc_train,
             y_test=y_binc_test
         )
+        
+    # init dimensionality reduction algorithms
+    dr_pca = PCA(n_components=2)
+    
+    dim_reduction_algos = [dr_pca]
+    
+    # run dimensionality reduction pipelines   
+    for algo in dim_reduction_algos:
+        util.dim_reduction_pipeline(
+            dim_reduction=algo,
+            X_train=X_multic_train,
+            X_test=X_multic_test
+        )
+    
 
 #--- run algorithm pipelines --------------------------------------------------#
 

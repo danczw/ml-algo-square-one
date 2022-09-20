@@ -15,7 +15,7 @@ def regression_pipeline(
     X_test:np.ndarray,
     y_train:np.ndarray,
     y_test:np.ndarray
-):
+) -> float:
     # fit algorithm using train data
     regression.fit(X_train, y_train)
     # predict y using test data
@@ -33,7 +33,7 @@ def classification_pipeline(
     X_test:np.ndarray,
     y_train:np.ndarray,
     y_test:np.ndarray
-):
+) -> float:
     # fit algorithm using train data
     classifier.fit(X_train, y_train)
     # predict y using test data
@@ -43,3 +43,18 @@ def classification_pipeline(
     print(f"{acc:.4f} - accuracy - {classifier.name}")
     
     return acc
+
+# train test pipeline for dimensionality reduction algorithms
+def dim_reduction_pipeline(
+    dim_reduction:object,
+    X_train:np.ndarray,
+    X_test:np.ndarray
+) -> np.ndarray:
+    # fit algorithm using train data
+    dim_reduction.fit(X_train)
+    # predict y using test data
+    X_projected = dim_reduction.transform(X_test)
+    # show reduced X shape  
+    print(f"{X_projected.shape} - components - {dim_reduction.name}")
+    
+    return X_projected
