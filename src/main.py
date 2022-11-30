@@ -7,6 +7,7 @@ from algo.perceptron import Perceptron
 from algo.principle_components_analysis import PCA
 from algo.random_forest import RandomForest
 from algo.random_forest import RandomForest
+from algo.support_vector_machine import SVM
 import util
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
@@ -87,17 +88,19 @@ def main():
     clf_random_forest = RandomForest(n_trees=10, min_samples_split=3)
     clf_naive_bayes = NaiveBayes()
     clf_percepton = Perceptron(learning_rate=0.01, n_iters=1000)
+    clf_svm = SVM(learning_rate=0.01, lambda_param=0.1, n_iters=1000)
     
-    multi_class_algos = [
+    bin_class_algos = [
         clf_logistic_reg,
         clf_decision_tree,
         clf_random_forest,
         clf_naive_bayes,
-        clf_percepton
+        clf_percepton,
+        clf_svm
     ]
     
     # run binary classification pipelines
-    for algo in multi_class_algos:
+    for algo in bin_class_algos:
         util.classification_pipeline(
             classifier=algo,
             X_train=X_binc_train,
