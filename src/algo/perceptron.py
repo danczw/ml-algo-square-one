@@ -2,7 +2,7 @@ import numpy as np
 
 class Perceptron:
     def __init__(self, learning_rate:float=0.001, n_iters:int=1000):
-        self.name = "Perceptron"
+        self.name = "perceptron"
         self.lr = learning_rate
         self.n_iters = n_iters
         self.weights = None
