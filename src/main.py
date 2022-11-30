@@ -96,11 +96,11 @@ def main():
     clf_svm = SVM(learning_rate=0.01, lambda_param=0.1, n_iters=1000)
     
     bin_class_algos = [
-        # clf_logistic_reg,
-        # clf_decision_tree,
-        # clf_random_forest,
-        # clf_naive_bayes,
-        # clf_percepton,
+        clf_logistic_reg,
+        clf_decision_tree,
+        clf_random_forest,
+        clf_naive_bayes,
+        clf_percepton,
         clf_svm
     ]
     
