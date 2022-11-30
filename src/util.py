@@ -70,3 +70,15 @@ def dim_reduction_pipeline(
     print(f"{X_projected.shape} - components - {dim_reduction.name}")
     
     return X_projected
+
+# train test pipeline for clustering algorithms
+def k_clustering_pipeline(
+    clustering:object,
+    X_train:np.ndarray,
+    y_train:np.ndarray
+) -> np.ndarray:
+    # fit algorithm using train data
+    k = clustering.predict(X_train)
+    # show number of predicted and real clusters
+    print(f"{len(np.unique(k))} - clusters - {clustering.name}")
+    clustering.plot()
